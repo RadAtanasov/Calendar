@@ -1,7 +1,7 @@
-import {combineReducers} from 'redux';
+import getWorkingDays from './getWorkingDays';
 
-const reducers = combineReducers({
-
-});
+const reducers = {
+    workingDays: getWorkingDays
+};
 
 export default reducers;

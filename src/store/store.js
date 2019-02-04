@@ -7,6 +7,6 @@ const store = createStore(
         ...reducers,
         routing: routerReducer
     })
-)
+);
 
 export default store;

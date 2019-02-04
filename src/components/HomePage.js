@@ -1,14 +1,35 @@
 import React from 'react';
-import Header from './Header';
+import {connect} from 'react-redux';
+import styled from 'styled-components';
+import Header from './Header/Header';
+import Board from './Board/Board';
 
+const StyledHomePage = styled.div `
+  padding: 0;
+  margin: 0;
+`;
 
-const HomePage = props => {
-    return (
-        <div>
-            <Header/>
+const StyledMainContent = styled.div `
+  
+`;
 
-        </div>
-    )
-};
+class HomePage extends React.Component {
+    render() {
+        return (
+            <StyledHomePage>
+                <Header/>
+                <StyledMainContent>
+                    <Board workingDays={this.props.workingDays}/>
+                </StyledMainContent>
+            </StyledHomePage>
+        )
+    }
+}
 
-export default HomePage;
+const mapStateToProps = state => {
+    return {
+        workingDays: state.workingDays
+    }
+}
+
+export default connect(mapStateToProps)(HomePage);
