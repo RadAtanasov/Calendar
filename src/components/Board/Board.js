@@ -9,12 +9,12 @@ const StyledBoard = styled.div `
    background-color: rgba(100, 149, 237, 0.2);
 `;
 
-const Board = ({workingDays}) => {
+const Board = ({datesOfWeek, workingDays, workingDayLength}) => {
     return (
         <StyledBoard>
             {
                 workingDays.map((day, index) => {
-                    return <DayBoard day={day} key={day + index}/>
+                    return <DayBoard date={datesOfWeek[index]} workingDayLength={workingDayLength} day={day} key={day + index}/>
                 })
             }
         </StyledBoard>

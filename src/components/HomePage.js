@@ -19,7 +19,11 @@ class HomePage extends React.Component {
             <StyledHomePage>
                 <Header/>
                 <StyledMainContent>
-                    <Board workingDays={this.props.workingDays}/>
+                    <Board
+                        datesOfWeek={this.props.datesOfWeek}
+                        workingDayLength={this.props.workingDayLength}
+                        workingDays={this.props.workingDays}
+                    />
                 </StyledMainContent>
             </StyledHomePage>
         )
@@ -28,8 +32,10 @@ class HomePage extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        workingDays: state.workingDays
-    }
-}
+        workingDays: state.workingDays,
+        workingDayLength: state.workingDayLength,
+        datesOfWeek: state.DatesOfWeek
+    };
+};
 
 export default connect(mapStateToProps)(HomePage);
