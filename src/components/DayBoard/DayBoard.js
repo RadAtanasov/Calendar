@@ -4,7 +4,6 @@ import TimeLine from '../TimeLine/TimeLine';
 import TaskWrapper from '../TaskWrapper/TaskWrapper';
 
 const StyledDayBoard = styled.div `
-  width: 200px;
   min-height: 500px;
   margin-top: 10px;
   margin-right: 10px;

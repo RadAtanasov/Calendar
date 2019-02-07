@@ -5,7 +5,8 @@ import getDatesOfWeek from './getDatesOfWeek';
 const reducers = {
     workingDays: getWorkingDays,
     workingDayLength: getWorkingDayLength,
-    DatesOfWeek: getDatesOfWeek
+    datesOfWeek: getDatesOfWeek,
+    authorisation: true
 };
 
 export default reducers;

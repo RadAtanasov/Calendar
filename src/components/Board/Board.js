@@ -7,6 +7,7 @@ const StyledBoard = styled.div `
    width: 100%;
    min-height: 500px;
    background-color: rgba(100, 149, 237, 0.2);
+   overflow-x: scroll;
 `;
 
 const Board = ({datesOfWeek, workingDays, workingDayLength}) => {

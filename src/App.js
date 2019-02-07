@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
-import {browserHistory, Route, Router} from "react-router";
-import {syncHistoryWithStore} from "react-router-redux";
-import store from "./store/store";
+// import {browserHistory} from "react-routers";
+import {BrowserRouter, Route} from 'react-router-dom';
+// import {syncHistoryWithStore} from "react-routers-redux";
+// import store from "./store/store";
 
 import HomePage from './components/HomePage';
+import AuthPage from './components/AuthPage';
 
-const history = syncHistoryWithStore(browserHistory, store);
+// const history = syncHistoryWithStore(browserHistory, store);
 
 class App extends Component {
   render() {
     return (
-        <Router history={history}>
-            <Route path="/" component={HomePage}>
-
-            </Route>
-        </Router>
+        <BrowserRouter>
+            <div>
+                <Route exact path="/" component={HomePage}/>
+                <Route exact path="/auth" component={AuthPage}/>
+            </div>
+        </BrowserRouter>
     );
   }
 }
