@@ -4,6 +4,9 @@ import {Redirect, withRouter} from 'react-router-dom';
 import styled from 'styled-components';
 import Header from './Header/Header';
 import Board from './Board/Board';
+import LoadingPage from './LoadingPage/LoadingPage';
+
+import {checkAuthOnServer} from "../reducers/checkAuth";
 
 const StyledHomePage = styled.div `
   padding: 0;
@@ -15,35 +18,54 @@ const StyledMainContent = styled.div `
 `;
 
 class HomePage extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        this.props.checkAutorisation();
+    }
+
     render() {
-        console.log(this.props);
-        if (!this.props.authorisation) {
-            return <Redirect to={'/auth'}/>
+        if (!this.props.checkAuth) {
+            return <LoadingPage/>
         } else {
-            return (
-                <StyledHomePage>
-                    <Header/>
-                    <StyledMainContent>
-                        <Board
-                            datesOfWeek={this.props.datesOfWeek}
-                            workingDayLength={this.props.workingDayLength}
-                            workingDays={this.props.workingDays}
-                        />
-                    </StyledMainContent>
-                </StyledHomePage>
-            )
+            if (!this.props.authorisation) {
+                return <Redirect to={'/register'}/>
+            } else {
+                return (
+                    <StyledHomePage>
+                        <Header autorisation={this.props.authorisation}/>
+                        <StyledMainContent>
+                            <Board
+                                datesOfWeek={this.props.datesOfWeek}
+                                workingDayLength={this.props.workingDayLength}
+                                workingDays={this.props.workingDays}
+                            />
+                        </StyledMainContent>
+                    </StyledHomePage>
+                )
+            }
         }
     }
 }
 
 const mapStateToProps = state => {
-    console.log(state);
     return {
         workingDays: state.workingDays,
         workingDayLength: state.workingDayLength,
         datesOfWeek: state.datesOfWeek,
-        authorisation: state.authorisation
+        authorisation: state.authorisation,
+        checkAuth: state.checkAuth
     };
 };
 
-export default withRouter(connect(mapStateToProps)(HomePage));
+const mapDispatchToProps = dispatch => {
+    return {
+        checkAutorisation: () => {
+            dispatch(checkAuthOnServer());
+        }
+    }
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomePage));

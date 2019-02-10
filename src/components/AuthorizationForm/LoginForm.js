@@ -1,12 +1,13 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form';
+import {required} from "../../helpers/validate";
 
-let AuthorizationForm = props => {
+let LoginForm = props => {
     const { handleSubmit } = props;
     return <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="login">Login</label>
-                    <Field name="login" component="input" type="login" />
+                    <Field name="login" component="input" type="login"/>
                 </div>
                 <div>
                     <label htmlFor="password">Password</label>
@@ -16,9 +17,9 @@ let AuthorizationForm = props => {
             </form>
 };
 
-AuthorizationForm = reduxForm({
+LoginForm = reduxForm({
     // a unique name for the form
-    form: 'contact'
-})(AuthorizationForm);
+    form: 'login'
+})(LoginForm);
 
-export default AuthorizationForm;
+export default LoginForm;

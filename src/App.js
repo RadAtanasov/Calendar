@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-// import {browserHistory} from "react-routers";
 import {BrowserRouter, Route} from 'react-router-dom';
-// import {syncHistoryWithStore} from "react-routers-redux";
-// import store from "./store/store";
 
 import HomePage from './components/HomePage';
-import AuthPage from './components/AuthPage';
-
-// const history = syncHistoryWithStore(browserHistory, store);
+import RegisterPage from './components/RegisterPage';
+import LoginPage from './components/LoginPage';
 
 class App extends Component {
   render() {
@@ -15,7 +11,8 @@ class App extends Component {
         <BrowserRouter>
             <div>
                 <Route exact path="/" component={HomePage}/>
-                <Route exact path="/auth" component={AuthPage}/>
+                <Route exact path="/register" component={RegisterPage}/>
+                <Route exact path="/login" component={LoginPage}/>
             </div>
         </BrowserRouter>
     );

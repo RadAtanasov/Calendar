@@ -2,11 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect, withRouter} from 'react-router-dom';
 import axios from 'axios';
-import AuthorizationForm from './AuthorizationForm/AuthorizationForm';
+import RegisterForm from './AuthorizationForm/RegisterForm';
 
-class AuthPage extends React.Component {
+import Header from './Header/Header';
+
+class RegisterPage extends React.Component {
     submit = values => {
-        axios.post('/', JSON.stringify(values)).then((res) => {
+        axios.post('/register', JSON.stringify(values)).then((res) => {
             console.log(res);
         });
     };
@@ -17,7 +19,10 @@ class AuthPage extends React.Component {
             return <Redirect to={'/'}/>
         } else {
             return (
-                <AuthorizationForm onSubmit={this.submit}/>
+                <div>
+                    <Header/>
+                    <RegisterForm onSubmit={this.submit}/>
+                </div>
             )
         }
 
@@ -30,4 +35,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default withRouter(connect(mapStateToProps)(AuthPage));
+export default withRouter(connect(mapStateToProps)(RegisterPage));
