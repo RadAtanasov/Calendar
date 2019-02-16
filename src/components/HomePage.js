@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect, withRouter} from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
 import Header from './Header/Header';
 import Board from './Board/Board';
 import LoadingPage from './LoadingPage/LoadingPage';
@@ -22,11 +23,20 @@ class HomePage extends React.Component {
         super(props);
     }
 
+    logoutFunction = () => {
+        axios.get('/logout').then((res) => {
+            if (res.data.result) {
+                this.props.checkAutorisation();
+            }
+        });
+    }
+
     componentDidMount() {
         this.props.checkAutorisation();
     }
 
     render() {
+        console.log(this.props);
         if (!this.props.checkAuth) {
             return <LoadingPage/>
         } else {
@@ -35,7 +45,7 @@ class HomePage extends React.Component {
             } else {
                 return (
                     <StyledHomePage>
-                        <Header autorisation={this.props.authorisation}/>
+                        <Header handleClick={this.logoutFunction} autorisation={this.props.authorisation}/>
                         <StyledMainContent>
                             <Board
                                 datesOfWeek={this.props.datesOfWeek}

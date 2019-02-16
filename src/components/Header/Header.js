@@ -18,7 +18,7 @@ const StyledButtonWrapper = styled.div `
   width: 100%;
 `;
 
-const Header = ({autorisation}) => {
+const Header = ({autorisation, handleClick, addTaskClick}) => {
     if (!autorisation) {
         return (
             <StyledHeader>
@@ -34,7 +34,9 @@ const Header = ({autorisation}) => {
             <StyledHeader>
                 <Logo/>
                 <StyledButtonWrapper>
-                    <HeaderButton route='/logout' buttonText='Logout'/>
+                    {autorisation.userLogin}
+                    <HeaderButton handleClick={addTaskClick} buttonText='+ Add task'/>
+                    <HeaderButton handleClick={handleClick} buttonText='Logout'/>
                 </StyledButtonWrapper>
             </StyledHeader>
         );

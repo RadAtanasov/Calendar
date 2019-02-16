@@ -18,7 +18,11 @@ export function checkAuthOnServer() {
             dispatch({
                 type: 'checkAuth',
                 payload: res.data.result
-            })
+            });
+            dispatch({
+                type: 'setAuth',
+                payload: res.data.data
+            });
         });
     };
 };

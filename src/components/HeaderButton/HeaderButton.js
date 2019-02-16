@@ -12,6 +12,10 @@ const StyledButton = styled.button `
   padding: 5px;
   background-color: rgba(255, 255, 255, 0);
   box-sizing: border-box;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1;
   a {
     text-decoration: none;
     color: #fff;
@@ -22,18 +26,23 @@ const StyledButton = styled.button `
     cursor: pointer;
     background-color: #fff;
     outline: none;
+    color: #9D9D9D;
       a {
         color: #9D9D9D;
       }
   }
 `;
 
-const HeaderButton = ({buttonText, route}) => {
+const HeaderButton = ({buttonText, route, handleClick}) => {
     return (
-        <StyledButton>
-            <Link to={route}>
-                {buttonText}
-            </Link>
+        <StyledButton onClick={handleClick}>
+            {
+                route
+                ? <Link to={route}>
+                      {buttonText}
+                  </Link>
+                : buttonText
+            }
         </StyledButton>
     );
 };

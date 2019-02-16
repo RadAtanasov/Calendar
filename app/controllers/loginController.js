@@ -24,16 +24,34 @@ var loginUser = function (data, request, response) {
     });
 };
 
-var checkAuth = function (request, response) {
+var logoutUser = function (data, request, response) {
     if (request.session) {
+        request.session.destroy(function () {
+            response.send({
+                result: true,
+                message: 'User was logout',
+                error: null
+            })
+        });
+    }
+};
+
+var checkAuth = function (request, response) {
+    console.log(request.session);
+    if (request.session.userId) {
         response.send({
             result: true,
+            data: {
+                userId: request.session.userId,
+                userLogin: request.session.userLogin
+            },
             message: 'User login',
-            error: null
+            error: null,
         });
     } else {
         response.send({
-            result: false,
+            result: true,
+            data: false,
             message: 'User logout',
             error: null
         });
@@ -44,5 +62,6 @@ var checkAuth = function (request, response) {
 
 module.exports = {
     loginUser,
+    logoutUser,
     checkAuth
 };
