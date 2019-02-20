@@ -3,11 +3,13 @@ import {connect} from 'react-redux';
 import {Redirect, withRouter} from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
-import Header from './Header/Header';
-import Board from './Board/Board';
-import LoadingPage from './LoadingPage/LoadingPage';
+import Header from '../../components/Header/Header';
+import Board from '../../components/Board/Board';
+import LoadingPage from '../../components/LoadingPage/LoadingPage';
+import AddTaskModal from '../../components/Modal/AddTaskModal';
 
-import {checkAuthOnServer} from "../reducers/checkAuth";
+import {checkAuthOnServer} from "../../reducers/checkAuth";
+import {getTasksFromDB} from "../../reducers/getTasks";
 
 const StyledHomePage = styled.div `
   padding: 0;
@@ -29,14 +31,18 @@ class HomePage extends React.Component {
                 this.props.checkAutorisation();
             }
         });
-    }
+    };
+
+    toggleAddModal = () => {
+        this.props.toggleModal(!this.props.toggleAddModalStatus);
+    };
 
     componentDidMount() {
         this.props.checkAutorisation();
+        this.props.getTasks();
     }
 
     render() {
-        console.log(this.props);
         if (!this.props.checkAuth) {
             return <LoadingPage/>
         } else {
@@ -45,14 +51,16 @@ class HomePage extends React.Component {
             } else {
                 return (
                     <StyledHomePage>
-                        <Header handleClick={this.logoutFunction} autorisation={this.props.authorisation}/>
+                        <Header addTaskClick={this.toggleAddModal} handleClick={this.logoutFunction} autorisation={this.props.authorisation}/>
                         <StyledMainContent>
                             <Board
                                 datesOfWeek={this.props.datesOfWeek}
                                 workingDayLength={this.props.workingDayLength}
                                 workingDays={this.props.workingDays}
+                                tasks={this.props.tasks}
                             />
                         </StyledMainContent>
+                        {this.props.toggleAddModalStatus ? <AddTaskModal closeModal={this.toggleAddModal}/> : ''}
                     </StyledHomePage>
                 )
             }
@@ -66,7 +74,9 @@ const mapStateToProps = state => {
         workingDayLength: state.workingDayLength,
         datesOfWeek: state.datesOfWeek,
         authorisation: state.authorisation,
-        checkAuth: state.checkAuth
+        checkAuth: state.checkAuth,
+        toggleAddModalStatus: state.toggleAddModal,
+        tasks: state.tasks
     };
 };
 
@@ -74,6 +84,15 @@ const mapDispatchToProps = dispatch => {
     return {
         checkAutorisation: () => {
             dispatch(checkAuthOnServer());
+        },
+        toggleModal: (toggleStatus) => {
+            dispatch({
+                type: 'toggleModal',
+                payload: toggleStatus
+            })
+        },
+        getTasks: () => {
+            dispatch(getTasksFromDB());
         }
     }
 };

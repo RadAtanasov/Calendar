@@ -10,12 +10,12 @@ const StyledBoard = styled.div `
    overflow-x: scroll;
 `;
 
-const Board = ({datesOfWeek, workingDays, workingDayLength}) => {
+const Board = ({datesOfWeek, workingDays, workingDayLength, tasks}) => {
     return (
         <StyledBoard>
             {
                 workingDays.map((day, index) => {
-                    return <DayBoard date={datesOfWeek[index]} workingDayLength={workingDayLength} day={day} key={day + index}/>
+                    return <DayBoard tasks={tasks[datesOfWeek[index]]} date={datesOfWeek[index]} workingDayLength={workingDayLength} day={day} key={day + index}/>
                 })
             }
         </StyledBoard>

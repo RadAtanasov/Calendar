@@ -37,7 +37,7 @@ const StyledDayBoard = styled.div `
   }
 `;
 
-const DayBoard = ({day, date, workingDayLength}) => {
+const DayBoard = ({day, date, workingDayLength, tasks}) => {
     return (
         <StyledDayBoard>
             <div className="day_name">
@@ -46,7 +46,7 @@ const DayBoard = ({day, date, workingDayLength}) => {
             </div>
             <div className="deals">
                 <TimeLine workingDayLength={workingDayLength}/>
-                <TaskWrapper/>
+                <TaskWrapper tasks={tasks} />
             </div>
         </StyledDayBoard>
     );

@@ -2,9 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect, withRouter} from 'react-router-dom';
 import axios from 'axios';
-import RegisterForm from './AuthorizationForm/RegisterForm';
+import RegisterForm from '../../components/AuthorizationForm/RegisterForm';
 
-import Header from './Header/Header';
+import Header from '../../components/Header/Header';
 
 class RegisterPage extends React.Component {
     submit = values => {

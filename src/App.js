@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 
-import HomePage from './components/HomePage';
-import RegisterPage from './components/RegisterPage';
-import LoginPage from './components/LoginPage';
+import HomePage from './containers/HomePage/HomePage';
+import RegisterPage from './containers/RegisterPage/RegisterPage';
+import LoginPage from './containers/LoginPage/LoginPage';
 
 class App extends Component {
   render() {

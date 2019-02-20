@@ -2,10 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect, withRouter} from 'react-router-dom';
 import axios from 'axios';
-import LoginForm from './AuthorizationForm/LoginForm';
+import LoginForm from '../../components/AuthorizationForm/LoginForm';
 
-import Header from './Header/Header';
-// import checkAuth from "../reducers/setAuth";
+import Header from '../../components/Header/Header';
 
 class LoginPage extends React.Component {
     submit = values => {

@@ -37,7 +37,6 @@ var logoutUser = function (data, request, response) {
 };
 
 var checkAuth = function (request, response) {
-    console.log(request.session);
     if (request.session.userId) {
         response.send({
             result: true,

@@ -4,12 +4,19 @@ import styled from 'styled-components';
 
 const StyledTaskWrapper = styled.div `
   min-width: 200px;
+  margin-top: 5px;
 `;
 
-const TaskWrapper = () => {
+const TaskWrapper = ({tasks}) => {
     return (
         <StyledTaskWrapper>
-            <Task/>
+            {
+                tasks
+                    ? tasks.map((taskData, index) => {
+                        return <Task taskData={taskData} key={index}/>
+                    })
+                    : ''
+            }
         </StyledTaskWrapper>
     );
 };
